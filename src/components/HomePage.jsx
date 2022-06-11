@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Header, Content, Footer, Nav, Carousel, Divider, Stack} from "rsuite";
+import { Container, Header, Content, Footer, Nav, Carousel, Divider} from "rsuite";
 import { Link } from "react-router-dom";
 import { QuizList } from './QuizList';
 
@@ -7,13 +7,13 @@ export function HomePage(){
     let QuizSets = [{
         title: "Pokemon Movesets",
         quantity: 10,
-        createdBy: "Go Gina",
+        createdBy: "dbissou",
         img: "https://www.nicepng.com/png/detail/485-4856027_pikachu-pikachu-ears-cute-pikachu-cute-pokemon-pokemon.png",
         description:'Take this quiz to test your pokemon moveset knowledge!'
     },{
         title: "Pokemon Origins",
         quantity: 15,
-        createdBy: "Becky With Tha Good Hair",
+        createdBy: "dbissou",
         img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png",
         description:'Take this quiz to test your knowledge on pokemon origins!'
     }]
@@ -22,11 +22,10 @@ export function HomePage(){
         <Container>
             <Header>
                 <div class={"custom-nav-style"}>
-                    <Nav appearance={'tabs'} reversed>
-                        
-                        <Nav.Item active><Link to="/">Home</Link></Nav.Item>
-                        <Nav.Item>Tutorial</Nav.Item>
-                        <Nav.Item>Create</Nav.Item>
+                    <Nav reversed>
+                        <Nav.Item active href={"/"}>Home</Nav.Item>
+                        <Nav.Item href={"/tutorial"}>Tutorial</Nav.Item>
+                        <Nav.Item href={"/create"} >Create</Nav.Item>
                     </Nav>
                 </div>
             </Header>
