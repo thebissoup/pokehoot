@@ -8,31 +8,44 @@ export function QuizForm({open, handleClose}){
         
         const [title, setTitle] = useState({title: "", length: 0});
         const [description, setDescription] = useState({desc:"", length:0});
-        const [questions, setQuestions] = useState([]);
+        const [questions, setQuestions] = useState([{}]);
        
-        const handleSave = () => {
-            console.log(title);
-            console.log(description);
-            console.log(questions)
-            handleClose();
         
-        };
-
         const addQuestion = () =>{
             setQuestions(questions => [...questions, {}])
         }
 
-        const deleteData = () =>{
-            // reset data then close
+        const deleteQuestion = (index) => {
+            console.log(index);
         }
 
-        const questionList = questions.map((obj,index) => {
-            return <QuestionInput index={index}  setQuestions={setQuestions}></QuestionInput>
+        const resetData = () =>{
+            setTitle({...title, title:"", length:0});
+            setDescription({...description, desc:"", length: 0});
+            setQuestions([{}]);
+        }
+
+        const handleSave = () => {
+            //"saving the data"
+            console.log(title);
+            console.log(description);
+            console.log(questions);
+            handleClose();
+            resetData();
+        };
+
+        const handleExit = () =>{
+            handleClose();
+            resetData();
+        }
+
+        const questionList = questions.map((obj,index) => { // component list
+            return <QuestionInput index={index}  deleteQuestion={deleteQuestion} setQuestions={setQuestions}></QuestionInput>
         })
 
 
     return(
-        <Modal open={open} onClose={handleClose} backdrop={'static'} size={'lg'} overflow={false}>
+        <Modal open={open} onClose={handleExit} backdrop={'static'} size={'lg'} overflow={false}>
                    <Modal.Header>
                        <Modal.Title>New Quiz</Modal.Title>
                    </Modal.Header>
@@ -69,7 +82,7 @@ export function QuizForm({open, handleClose}){
                         <button onClick={handleSave} class="ui button green">
                             Save
                         </button>
-                        <button onClick={handleClose} class="ui button">
+                        <button onClick={handleExit} class="ui button">
                             Cancel
                         </button>
                    </Modal.Footer>

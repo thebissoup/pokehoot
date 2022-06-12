@@ -7,6 +7,16 @@
   width: 290px;
 }
 
-.dim-spaced{
+.dim-spaced{ /* the divider component margin is too big*/
   margin: 5px 0;
+}
+
+.q-delete{ /* need space between button and form.control component*/
+  margin: 7px 0;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.q-delete-space{/*for the first index only so the whitespace doesn't look weird*/
+  height: 30px;
 }

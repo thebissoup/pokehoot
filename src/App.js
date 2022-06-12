@@ -13,8 +13,9 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<HomePage/>}></Route>
-        <Route path="/tutorial" element={<TutorialPage/>}></Route>
+        {/*<Route path="/tutorial" element={<TutorialPage/>}></Route>*/}
         <Route path="/create" element={<CreatePage/>}></Route>
+        {/*Library Route*/}
       </Routes>
     </div>
   );
