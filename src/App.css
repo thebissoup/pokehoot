@@ -20,3 +20,9 @@
 .q-delete-space{/*for the first index only so the whitespace doesn't look weird*/
   height: 30px;
 }
+
+.page-width{/* the html inside the content component to have a "margin"*/
+  display: flex;
+  flex-direction: column;
+  padding: 0 10%;
+}

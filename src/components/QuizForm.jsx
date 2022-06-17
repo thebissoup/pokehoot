@@ -1,28 +1,29 @@
 import React from "react";
 import { useState } from "react";
-import { Form, Modal, Input } from "rsuite";
+import { Form, Input } from "rsuite";
 import { QuestionInput } from "./QuestionInput";
 
-export function QuizForm({open, handleClose}){
+export function QuizForm(){
         
         
-        const [title, setTitle] = useState({title: "", length: 0});
+        const [title, setTitle] = useState({name: "", length: 0});
         const [description, setDescription] = useState({desc:"", length:0});
-        const [questions, setQuestions] = useState([{}]);
+        const [questions, setQuestions] = useState([{question:""}]);
        
         
         const addQuestion = () =>{
-            setQuestions(questions => [...questions, {}])
+            setQuestions(questions => [...questions, {question:""}])
         }
 
         const deleteQuestion = (index) => {
-            console.log(index);
+            //update questions
+            setQuestions(questions => [...questions.slice(0,index), ...questions.slice(index+1,questions.length)])
         }
 
         const resetData = () =>{
-            setTitle({...title, title:"", length:0});
+            setTitle({...title, name:"", length:0});
             setDescription({...description, desc:"", length: 0});
-            setQuestions([{}]);
+            setQuestions([{question:""}]);
         }
 
         const handleSave = () => {
@@ -30,39 +31,30 @@ export function QuizForm({open, handleClose}){
             console.log(title);
             console.log(description);
             console.log(questions);
-            handleClose();
             resetData();
         };
 
-        const handleExit = () =>{
-            handleClose();
-            resetData();
-        }
 
         const questionList = questions.map((obj,index) => { // component list
-            return <QuestionInput index={index}  deleteQuestion={deleteQuestion} setQuestions={setQuestions}></QuestionInput>
+            return <QuestionInput index={index}  deleteQuestion={deleteQuestion} setQuestions={setQuestions} obj={obj}></QuestionInput>
         })
 
 
     return(
-        <Modal open={open} onClose={handleExit} backdrop={'static'} size={'lg'} overflow={false}>
-                   <Modal.Header>
-                       <Modal.Title>New Quiz</Modal.Title>
-                   </Modal.Header>
-                   <Modal.Body>
-                        <Form fluid>
+        <div>
+            <Form fluid>
                                 <Form.Group>
                                     <Form.ControlLabel>Title: </Form.ControlLabel>
-                                    <Form.Control name="title" maxLength={50} onChange ={(text) => {
+                                    <Form.Control name="title" value={title.name} maxLength={50} onChange ={(text) => {
                                         setTitle({...title,
-                                            title: text,
+                                            name: text,
                                             length: text.length});
                                         }}/>
                                     { (title.length > 25) ? <Form.HelpText>{50 - title.length} characters left</Form.HelpText> : null}
                                 </Form.Group>
                                 <Form.Group>
                                     <Form.ControlLabel>Description: </Form.ControlLabel>
-                                    <Input  as="textarea" onChange={(text)=>{
+                                    <Input value={description.desc}  as="textarea" onChange={(text)=>{
                                         setDescription({...description,
                                         desc:text,
                                         length:text.length});
@@ -77,16 +69,16 @@ export function QuizForm({open, handleClose}){
                                     </button>
                                 </Form.Group>
                         </Form>
-                   </Modal.Body>
-                   <Modal.Footer>
-                        <button onClick={handleSave} class="ui button green">
-                            Save
-                        </button>
-                        <button onClick={handleExit} class="ui button">
-                            Cancel
-                        </button>
-                   </Modal.Footer>
-               </Modal>
+                        <div class="dim-spaced">
+                            <button onClick={handleSave} class="ui button green">
+                                Save
+                            </button>
+                            <button class="ui button">
+                                Cancel
+                            </button>
+                        </div>
+        </div>
+        
         
     )
 }
