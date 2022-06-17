@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Form, Input } from "rsuite";
+import { Form, Input, Stack} from "rsuite";
 import { QuestionInput } from "./QuestionInput";
 
 export function QuizForm(){
@@ -16,7 +16,6 @@ export function QuizForm(){
         }
 
         const deleteQuestion = (index) => {
-            //update questions
             setQuestions(questions => [...questions.slice(0,index), ...questions.slice(index+1,questions.length)])
         }
 
@@ -27,7 +26,7 @@ export function QuizForm(){
         }
 
         const handleSave = () => {
-            //"saving the data"
+            // make post request to backend
             console.log(title);
             console.log(description);
             console.log(questions);
@@ -42,6 +41,15 @@ export function QuizForm(){
 
     return(
         <div>
+            <Stack justifyContent={"space-between"} spacing={6}>
+                <h1>{(title.length < 1) ? "New Quiz": title.name}</h1>
+                <button class="ui button">
+                    <i class="plus icon"></i>
+                    New Quiz
+                </button>
+            </Stack>
+
+            <hr class="dim-spaced"/>
             <Form fluid>
                                 <Form.Group>
                                     <Form.ControlLabel>Title: </Form.ControlLabel>
