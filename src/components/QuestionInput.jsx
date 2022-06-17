@@ -1,17 +1,13 @@
 import React from "react";
-import {Form, Stack} from "rsuite";
-import { useEffect } from "react";
+import {Form} from "rsuite";
 
-export function QuestionInput({index, deleteQuestion, setQuestions}){
-    useEffect(() =>{
-        setTimeout(() => {
-            console.log("hi")
-        }, 1000);
-    })
+
+export function QuestionInput({index, deleteQuestion, setQuestions, obj}){
+   
     return(
         <Form.Group>
             <Form.ControlLabel>Question {index+1}:</Form.ControlLabel>
-            <Form.Control name="q-1" onChange={text => {
+            <Form.Control value={obj.question} name="q-1" onChange={text => {
                 setQuestions( questionArr => {
                     return [...questionArr.slice(0,index),
                     {question:text},
@@ -19,8 +15,10 @@ export function QuestionInput({index, deleteQuestion, setQuestions}){
                     ]
                 });
             }} ></Form.Control>
-            <div class={`q-delete`} id ={`${index}`}>
-                <button class ="ui red compact button" >
+            <div class={`q-delete`} >
+                <button class ="ui red compact button" onClick={() => {
+                deleteQuestion(index);
+            }}>
                     <i class="window close icon"></i>
                     Remove</button>
             </div>
