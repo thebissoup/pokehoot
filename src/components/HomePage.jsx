@@ -25,6 +25,7 @@ export function HomePage(){
                         <Nav.Item active href={"/"}>Home</Nav.Item>
                         <Nav.Item href={"/tutorial"}>Tutorial</Nav.Item>
                         <Nav.Item href={"/create"} >Create</Nav.Item>
+                        <Nav.Item href={"/library"} >Library</Nav.Item>
                     </Nav>
                 </div>
             </Header>
