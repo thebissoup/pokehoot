@@ -8,7 +8,7 @@
 }
 
 .dim-spaced{ /* the divider component margin is too big*/
-  margin: 5px 0;
+  margin: 10px 0;
 }
 
 .q-delete{ /* need space between button and form.control component*/
@@ -25,4 +25,8 @@
   display: flex;
   flex-direction: column;
   padding: 0 10%;
+}
+
+.fairy-tag{
+  background-color: brown;
 }

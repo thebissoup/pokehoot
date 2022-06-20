@@ -1,7 +1,7 @@
 import React from "react";
 
 
-export function Card({data}){
+export function QuizCard({data}){
     return(
         <div class="ui card">
             <div class="image">
