@@ -20,7 +20,7 @@ export function HomePage(){
     return(
         <Container>
             <Header>
-                <div class={"custom-nav-style"}>
+                <div className={"custom-nav-style"}>
                     <Nav reversed>
                         <Nav.Item active href={"/"}>Home</Nav.Item>
                         <Nav.Item href={"/tutorial"}>Tutorial</Nav.Item>

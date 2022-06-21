@@ -6,7 +6,7 @@ export function LibraryPage(){
     return(
         <Container>
             <Header>
-            <div class={"custom-nav-style"}>
+            <div class="custom-nav-style">
                     <Nav reversed>
                         <Nav.Item href={"/"}>Home</Nav.Item>
                         <Nav.Item href={"/tutorial"}>Tutorial</Nav.Item>

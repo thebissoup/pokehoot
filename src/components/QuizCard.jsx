@@ -5,7 +5,7 @@ export function QuizCard({data}){
     return(
         <div class="ui card">
             <div class="image">
-                <img src={data.img}/>
+                <img src={data.img} alt=""/>
             </div>
             <div class="content">
                 <div class="header">{data.title}                

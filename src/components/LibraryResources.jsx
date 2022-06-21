@@ -1,6 +1,6 @@
 import React from "react";
 import {useState} from "react";
-import { ResourceCard } from "./ResourceCard";
+import ResourceViewer from "./ResourceVIewer";
 
 import { Stack, Nav } from "rsuite";
 
@@ -22,11 +22,7 @@ export function LibraryResources(){
                 
             </Nav>
             <Stack className={"dim-spaced"} wrap spacing={15}>
-                <ResourceCard/>
-                <ResourceCard/>
-                <ResourceCard/>
-                <ResourceCard/>
-                <ResourceCard/>
+                <ResourceViewer view={active}></ResourceViewer>
             </Stack>
         </div>
     )

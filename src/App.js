@@ -2,7 +2,7 @@
 import './App.css';
 import React from "react";
 import { HomePage } from './components/HomePage';
-import { TutorialPage} from "./components/TutorialPage";
+// import { TutorialPage} from "./components/TutorialPage";
 import { CreatePage } from './components/CreatePage';
 import { LibraryPage } from './components/LibraryPage';
 import { Routes, Route} from "react-router-dom";

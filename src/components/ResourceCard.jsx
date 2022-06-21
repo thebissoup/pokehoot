@@ -1,16 +1,16 @@
 import React from "react";
 import {Tag, TagGroup} from "rsuite";
 
-export function ResourceCard(){
+export function ResourceCard({data}){
     return(
         <div class="ui card">
             <div class="image">
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"/>
+                <img src={data.src} alt=""/>
             </div>
             <div class="content">
-                <a class="header">Pikachu</a>
+                <a class="header" href="#">{data.name}</a>
                 <div class="meta">
-                <span class="date">Electric</span>
+                <span class="date">{data.type}</span>
                 </div>
                 {/* <div class="description">
                 Kristy is an art director living in New York.
@@ -18,8 +18,7 @@ export function ResourceCard(){
             </div>
             <div class="extra content">
                 <TagGroup>
-                    <Tag>Lightning Rod</Tag>
-                    <Tag>Static</Tag>
+                    {data.meta.map((meta) => <Tag>{meta}</Tag>)}
                 </TagGroup>
             </div>
         </div>

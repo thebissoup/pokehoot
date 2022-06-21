@@ -3,8 +3,8 @@ import { Stack } from "rsuite";
 import React from "react"
 
 export function QuizList({QuizSets}){
-        const listItems = QuizSets.map((data) =>
-            <QuizCard data={data}></QuizCard>
+        const listItems = QuizSets.map((data,index) =>
+            <QuizCard data={data} key={index}></QuizCard>
         );
 
     return(

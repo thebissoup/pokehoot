@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import { Container, Header, Content, Footer, Nav,} from "rsuite";
 import { QuizForm } from "./QuizForm";
 
