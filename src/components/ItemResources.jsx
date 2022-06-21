@@ -1,0 +1,12 @@
+import React from "react";
+import { ResourceCard } from "./ResourceCard";
+
+export default function ItemResources(){
+    let item = {src:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/great-ball.png", name:"Great-Ball", type:"Standard-Balls", meta:["Countable", "Consumable", "Usable-in-battle", "Holdable"]}
+    //use useState hook to fetch
+    //it should also receive a filter
+    //return a list
+    return(
+       <ResourceCard data={item}/>
+    )
+}

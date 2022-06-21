@@ -1,10 +1,10 @@
-import { Card } from "./Card";
+import { QuizCard } from "./QuizCard";
 import { Stack } from "rsuite";
 import React from "react"
 
 export function QuizList({QuizSets}){
-        const listItems = QuizSets.map((data) =>
-            <Card data={data}></Card>
+        const listItems = QuizSets.map((data,index) =>
+            <QuizCard data={data} key={index}></QuizCard>
         );
 
     return(
