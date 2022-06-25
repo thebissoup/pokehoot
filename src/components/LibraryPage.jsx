@@ -3,10 +3,11 @@ import { Container, Header, Content, Footer, Nav,} from "rsuite";
 import { LibraryResources } from './LibraryResources';
 
 export function LibraryPage(){
+
     return(
         <Container>
             <Header>
-            <div class="custom-nav-style">
+            <div className={"custom-nav-style"}>
                     <Nav reversed>
                         <Nav.Item href={"/"}>Home</Nav.Item>
                         <Nav.Item href={"/tutorial"}>Tutorial</Nav.Item>
@@ -16,7 +17,7 @@ export function LibraryPage(){
                 </div>
             </Header>
             <Content>
-                <div class="page-width">
+                <div className={"page-width"}>
                     <LibraryResources/>
                 </div>
             </Content>
