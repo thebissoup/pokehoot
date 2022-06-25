@@ -7,6 +7,7 @@ export default function ItemResources(){
     //it should also receive a filter
     //return a list
     return(
-       <ResourceCard data={item}/>
+        <div>In Development</div>
+    //    <ResourceCard data={item}/>
     )
 }

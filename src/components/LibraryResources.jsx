@@ -1,18 +1,42 @@
 import React from "react";
 import {useState} from "react";
+import {useEffect} from "react";
 import ResourceViewer from "./ResourceVIewer";
 
 import { Stack, Nav } from "rsuite";
 
 export function LibraryResources(){
+    
     const [active,setActive] = useState("pokemon");
+    const [resources, setResources] = useState([]);
+
+     useEffect(() =>{
+         getResourceArray(active);
+         console.log("fired")
+     },[])
+    
+
+    async function getResourceArray(active){
+        const response = await fetch(`https://pokeapi.co/api/v2/${active}?limit=1126&offset=0`);
+        let data = await response.json();
+        let urls = data.results.map((obj) => obj.url);
+        fetchAll(urls);
+    }
+
+    async function fetchAll(urls){
+        const res = await Promise.all(urls.map(url => fetch(url)));
+        const jsons = await Promise.all(res.map(response => response.json()))
+        setResources(jsons);
+        console.log("fetched")
+    }
+
     return(
         <div>
             <Stack justifyContent={"space-between"} spacing={6}>
                 <h1>Library</h1>
             </Stack>
 
-            <hr class="dim-spaced"/>
+            <hr className={"dim-spaced"}/>
             <Nav activeKey={active} appearance="tabs">
                 <Nav.Item eventKey={"pokemon"} onClick={()=> setActive("pokemon")}>
                     PokeMon
@@ -21,9 +45,9 @@ export function LibraryResources(){
                 <Nav.Item eventKey={'misc'} onClick={()=> setActive("misc")}>Misc.</Nav.Item>
                 
             </Nav>
-            <Stack className={"dim-spaced"} wrap spacing={15}>
-                <ResourceViewer view={active}></ResourceViewer>
-            </Stack>
+            
+                 <ResourceViewer view={active} resources={resources}></ResourceViewer>
+
         </div>
     )
 }
