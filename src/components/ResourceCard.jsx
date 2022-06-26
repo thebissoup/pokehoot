@@ -2,7 +2,14 @@ import React from "react";
 import {Tag, TagGroup, Badge} from "rsuite";
 
 export function ResourceCard({data}){
-    const metaList = data.abilities.map((obj) => <Tag>{obj.ability.name}</Tag>)
+    const abilityList = data.abilities.map((obj) => <Tag>{obj.ability.name}</Tag>)
+    const metaList = data.types.map((obj,index) => {
+        return(
+            <span key={index} className={"date " + obj.type.name} >
+                <Badge style={{background: 'transparent'}} content={obj.type.name} />
+            </span>
+        )
+    } )
     return(
         <a className="ui card" href="/">
             <div className="image">
@@ -11,7 +18,7 @@ export function ResourceCard({data}){
             <div className="content">
                 <div className="header" href="#">{data.name}</div>
                 <div className="meta">
-                <span className="date"><Badge style={{background: 'grey'}} content={data.types[0].type.name} /></span>
+                    {metaList}
                 </div>
                 {/* <div class="description">
                 Kristy is an art director living in New York.
@@ -19,7 +26,7 @@ export function ResourceCard({data}){
             </div>
             <div className="extra content">
                 <TagGroup>
-                    {metaList}
+                    {abilityList}
                 </TagGroup>
             </div>
         </a>

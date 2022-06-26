@@ -12,11 +12,12 @@ export function LibraryResources(){
 
      useEffect(() =>{
          getResourceArray(active);
+         console.log(active);
      },[])
     
 
     async function getResourceArray(active){
-        const response = await fetch(`https://pokeapi.co/api/v2/${active}?limit=1126&offset=0`);
+        const response = await fetch(`https://pokeapi.co/api/v2/${active}?limit=2000&offset=0`);
         let data = await response.json();
         let urls = data.results.map((obj) => obj.url);
         fetchAll(urls);
@@ -26,12 +27,13 @@ export function LibraryResources(){
         const res = await Promise.all(urls.map(url => fetch(url)));
         const jsons = await Promise.all(res.map(response => response.json()))
         setResources(jsons);
+        console.log(jsons);
     }
 
     return(
         <div>
             <Stack justifyContent={"space-between"} spacing={6}>
-                <h1>Library</h1>
+                <h1>{active}</h1>
             </Stack>
 
             <hr className={"dim-spaced"}/>

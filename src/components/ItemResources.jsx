@@ -1,5 +1,4 @@
 import React from "react";
-import { ResourceCard } from "./ResourceCard";
 
 export default function ItemResources(){
     let item = {src:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/great-ball.png", name:"Great-Ball", type:"Standard-Balls", meta:["Countable", "Consumable", "Usable-in-battle", "Holdable"]}
