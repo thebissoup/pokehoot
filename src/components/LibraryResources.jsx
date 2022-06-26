@@ -12,7 +12,6 @@ export function LibraryResources(){
 
      useEffect(() =>{
          getResourceArray(active);
-         console.log("fired")
      },[])
     
 
@@ -27,7 +26,6 @@ export function LibraryResources(){
         const res = await Promise.all(urls.map(url => fetch(url)));
         const jsons = await Promise.all(res.map(response => response.json()))
         setResources(jsons);
-        console.log("fetched")
     }
 
     return(

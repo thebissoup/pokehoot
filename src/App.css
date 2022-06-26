@@ -27,3 +27,6 @@
   padding: 0 10%;
 }
 
+.header, .date, .rs-tag-text{
+  text-transform: capitalize;
+}
