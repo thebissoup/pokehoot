@@ -1,29 +1,79 @@
 .custom-nav-style{
-  margin: 20px;
-}
+    margin: 20px;
+  }
+  
+  .image{
+    height: 320px;
+    width: 290px;
+  }
+  
+  .dim-spaced{ /* the divider component margin is too big*/
+    margin: 10px 0;
+  }
+  
+  .q-delete{ /* need space between button and form.control component*/
+    margin: 7px 0;
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  
+  .q-delete-space{/*for the first index only so the whitespace doesn't look weird*/
+    height: 30px;
+  }
+  
+  .page-width{/* the html inside the content component to have a "margin"*/
+    display: flex;
+    flex-direction: column;
+    padding: 0 10%;
+  }
+  
+  .header, .date, .rs-tag-text{
+    text-transform: capitalize;
+  }
 
-.image{
-  height: 320px;
-  width: 290px;
-}
+  .date{
+    border-radius: 5px;
+    padding-bottom: 2px;
+  }
 
-.dim-spaced{ /* the divider component margin is too big*/
-  margin: 10px 0;
-}
+  .shrink{ /*to scale down the image size for items*/
+    transform: scale(0.5);
+  }
 
-.q-delete{ /* need space between button and form.control component*/
-  margin: 7px 0;
-  display: flex;
-  flex-direction: row-reverse;
-}
+  .normal {background: #A8A878}
+  .fire {background: #EA8033 }
+  .water {background: #89A2DF}
+  .grass {background: #78C850 }
+  .electric {background: #F8D030}
+  .ice {background: #98D8D8}
+  .fighting {background: #C03028 }
+  .poison {background: #A040A0}
+  .ground {background: #E0C068}
+  .flying {background: #A890F0 }
+  .psychic {background: #F85888 }
+  .bug {background: #A8B820}
+  .rock {background: #B8A038}
+  .ghost {background: #705898}
+  .dark {background: #705848}
+  .dragon {background: #7038F8}
+  .steel {background: #B8B8D0}
+  .fairy {background: #F0B6BC }
 
-.q-delete-space{/*for the first index only so the whitespace doesn't look weird*/
-  height: 30px;
-}
-
-.page-width{/* the html inside the content component to have a "margin"*/
-  display: flex;
-  flex-direction: column;
-  padding: 0 10%;
-}
-
+/* @normal:#A8A878;
+@fire:#EA8033;
+@water:#89A2DF;
+@grass:#78C850;
+@electric:#F8D030;
+@ice:#F8D030;
+@fighting:#C03028;
+@poison:#A040A0;
+@ground:#E0C068;
+@flying:#A890F0;
+@psychic:#F85888;
+@bug:#A8B820;
+@rock:#B8A038;
+@ghost:#705898;
+@dark:#705848;
+@dragon:#7038F8;
+@steel:#B8B8D0;
+@fairy:#F0B6BC; */
