@@ -36,6 +36,10 @@
     padding-bottom: 2px;
   }
 
+  .shrink{ /*to scale down the image size for items*/
+    transform: scale(0.5);
+  }
+
   .normal {background: #A8A878}
   .fire {background: #EA8033 }
   .water {background: #89A2DF}

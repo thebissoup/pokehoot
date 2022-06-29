@@ -1,12 +1,32 @@
 import React from "react";
+import { useState } from "react";
+import { Stack, Input, InputGroup, Loader } from "rsuite";
+import SearchIcon from '@rsuite/icons/Search';
+import ItemResourceCard from "./ItemResourceCard";
 
-export default function ItemResources(){
-    let item = {src:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/great-ball.png", name:"Great-Ball", type:"Standard-Balls", meta:["Countable", "Consumable", "Usable-in-battle", "Holdable"]}
-    //use useState hook to fetch
-    //it should also receive a filter
-    //return a list
+export default function ItemResources({resources}){
+    
+
+    const [filter, setFilter] = useState("");
+    const re = new RegExp(filter,"i");
+
+    let filtered = resources.filter((obj) => re.test(obj.name) ? obj : null)
+    let resourceList = filtered.map((obj, index) => <ItemResourceCard key={index} data={obj}/>)
+
+    if(resources.length === 0){
+        return(<Stack className={"dim-spaced"} wrap spacing={15}><Loader center size={"lg"} content="Loading" /></Stack>)
+    }
     return(
-        <div>In Development</div>
-    //    <ResourceCard data={item}/>
+        <div>
+            <InputGroup inside style={{width: "30%", margin: "10px 0"}} >
+                <Input placeholder="Filter search..." onChange={(text) => setFilter(text)}/>
+            <InputGroup.Button>
+            <SearchIcon />
+                </InputGroup.Button>
+            </InputGroup>
+            <Stack className={"dim-spaced"} wrap spacing={15}>
+                {resourceList}
+            </Stack>
+        </div>
     )
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import {Tag, TagGroup, Badge} from "rsuite";
 
-export function ResourceCard({data}){
+export function PokemonResourceCard({data}){
     const abilityList = data.abilities.map((obj) => <Tag>{obj.ability.name}</Tag>)
     const metaList = data.types.map((obj,index) => {
         return(

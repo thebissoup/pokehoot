@@ -3,7 +3,6 @@ import { Container, Header, Content, Footer, Nav,} from "rsuite";
 import { LibraryResources } from './LibraryResources';
 
 export function LibraryPage(){
-
     return(
         <Container>
             <Header>

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { ResourceCard } from "./ResourceCard";
+import { PokemonResourceCard } from "./PokemonResourceCard";
 import { Stack, Input, InputGroup, Loader } from "rsuite";
 import SearchIcon from '@rsuite/icons/Search';
 
@@ -10,7 +10,7 @@ export default function PokemonResources({resources}){
     const re = new RegExp(filter,"i");
 
     let filtered = resources.filter((obj) => re.test(obj.name) ? obj : null)
-    let resourceList = filtered.map((obj, index) => <ResourceCard key={index} data={obj}/>)
+    let resourceList = filtered.map((obj, index) => <PokemonResourceCard key={index} data={obj}/>)
 
     if(resources.length === 0){
         return(<Stack className={"dim-spaced"} wrap spacing={15}><Loader center size={"lg"} content="Loading" /></Stack>)
