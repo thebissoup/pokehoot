@@ -39,6 +39,13 @@
   .shrink{ /*to scale down the image size for items*/
     transform: scale(0.5);
   }
+  .box{
+    border: solid 1px #dce0e6;
+    padding: 10px 10px;
+    margin: 20px 0;
+    border-radius: 5px;
+    box-shadow: 5px 10px 18px #dce0e6;
+  }
 
   .normal {background: #A8A878}
   .fire {background: #EA8033 }
