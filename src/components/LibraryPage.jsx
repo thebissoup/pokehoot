@@ -9,7 +9,7 @@ export function LibraryPage(){
             <div className={"custom-nav-style"}>
                     <Nav reversed>
                         <Nav.Item href={"/"}>Home</Nav.Item>
-                        <Nav.Item href={"/tutorial"}>Tutorial</Nav.Item>
+                        {/* <Nav.Item href={"/tutorial"}>Tutorial</Nav.Item> */}
                         <Nav.Item href={"/create"} >Create</Nav.Item>
                         <Nav.Item active href={"/library"} >Library</Nav.Item>
                     </Nav>

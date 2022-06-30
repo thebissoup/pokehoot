@@ -11,7 +11,7 @@ export function CreatePage(){
                 <div class={"custom-nav-style"}>
                     <Nav activeKey={'create'} reversed>
                         <Nav.Item href={"/"}>Home</Nav.Item>
-                        <Nav.Item href={"/tutorial"}>Tutorial</Nav.Item>
+                        {/* <Nav.Item href={"/tutorial"}>Tutorial</Nav.Item> */}
                         <Nav.Item href={"/create"} eventKey={"create"}>Create</Nav.Item>
                         <Nav.Item href={"/library"} >Library</Nav.Item>
                     </Nav>
