@@ -11,11 +11,11 @@ export function QuestionInput({
   pokemon,
 }) {
   let pokemon_names = pokemon.map(
-    (obj) => obj.name.charAt(0).toUpperCase() + obj.name.slice(1)
+    (obj) => obj.name.charAt(0).toUpperCase() + obj.name.slice(1) //capitalization
   );
 
-  const [typing, setTyping] = useState(false);
-  const [inputValue, setInputValue] = useState("");
+  const [typing, setTyping] = useState(false); // button and autocomplete controller
+  const [inputValue, setInputValue] = useState(""); // for input value but onselect serves the final text for input
 
   const handleTagRemove = (tag) => {
     setQuestions((questionArr) => {
@@ -24,7 +24,7 @@ export function QuestionInput({
         {
           question: questionArr[index].question,
           choices: [
-            ...questionArr[index].choices.filter((item) => item !== tag),
+            ...questionArr[index].choices.filter((item) => item !== tag), // filters the tag in the choices array in the indexth object of the questionarray
           ],
         },
         ...questionArr.slice(index + 1),
@@ -38,29 +38,28 @@ export function QuestionInput({
         ...questionArr.slice(0, index),
         {
           question: questionArr[index].question,
-          choices: [...questionArr[index].choices, text],
+          choices: [...questionArr[index].choices, text], // appends the selected text to the choices array in the indexth object of the question array
         },
         ...questionArr.slice(index + 1),
       ];
     });
-
-    setTyping(false);
+    setTyping(false); // returns button
   };
 
   const handleButtonClick = () => {
-    setTyping(true);
-    setInputValue("");
+    setTyping(true); // returns autocomplete
+    setInputValue(""); // resets input
   };
 
   const onMouseOut = () => {
-    setTimeout(setTyping(false), "1000");
+    setTimeout(setTyping(false), "1000"); // returns button
   };
 
   const renderInput = () => {
     if (typing) {
       return (
         <AutoComplete
-          data={pokemon_names}
+          data={pokemon_names} // all possible answer choices
           renderMenuItem={(item) => {
             return (
               <div>
@@ -69,10 +68,10 @@ export function QuestionInput({
             );
           }}
           onChange={(text) => {
-            setInputValue(text);
+            setInputValue(text); // allows input text to be modified
           }}
-          onPressEnter={(event) => event.preventDefault()}
-          onSelect={handleInputConfirm}
+          onPressEnter={(event) => event.preventDefault()} // prevents default behavior
+          onSelect={handleInputConfirm} // modifies choices property of object
           value={inputValue}
         />
       );
@@ -96,7 +95,7 @@ export function QuestionInput({
             setQuestions((questionArr) => {
               return [
                 ...questionArr.slice(0, index),
-                { question: text },
+                { question: text }, // modifies text of question
                 ...questionArr.slice(index + 1),
               ];
             });

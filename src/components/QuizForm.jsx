@@ -2,8 +2,11 @@ import React from "react";
 import { Form, Input, Stack } from "rsuite";
 import { QuestionInput } from "./QuestionInput";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function QuizForm() {
+  let navigate = useNavigate();
+
   let urls = [
     {
       resource_name: "pokemon",
@@ -22,14 +25,15 @@ export function QuizForm() {
   }, []);
 
   async function getResourceArray({ resource_name, url }) {
-    //needs the name of the state resource
+    //fetches the array of urls, takes resource name and parent url
     const response = await fetch(url);
     let data = await response.json();
-    let urls = data.results.map((obj) => obj.url); // creates an array of fetch urls
+    let urls = data.results.map((obj) => obj.url); // returns an array of fetch urls
     fetchAll(resource_name, urls);
   }
 
   async function fetchAll(resource_name, urls) {
+    //makes each individual Promise to fetch pokemon data
     const res = await Promise.all(
       urls.map((url, index) =>
         fetch(url).catch((err) =>
@@ -38,18 +42,19 @@ export function QuizForm() {
       )
     );
     const jsons = await Promise.all(res.map((response) => response.json()));
-    setPokemons(jsons);
+    setPokemons(jsons); //sets pokemons from resource here.
   }
 
-  const [title, setTitle] = useState({ name: "", length: 0 });
-  const [description, setDescription] = useState({ desc: "", length: 0 });
-  const [questions, setQuestions] = useState([{ question: "", choices: [] }]);
+  const [title, setTitle] = useState({ name: "", length: 0 }); // form title
+  const [description, setDescription] = useState({ desc: "", length: 0 }); // form description
+  const [questions, setQuestions] = useState([{ question: "", choices: [] }]); // form questions
 
   const addQuestion = () => {
-    setQuestions((questions) => [...questions, { question: "", choices: [] }]);
+    setQuestions((questions) => [...questions, { question: "", choices: [] }]); //adds another question to question object array
   };
 
   const deleteQuestion = (index) => {
+    // deletes an object in the object array at a specific index
     setQuestions((questions) => [
       ...questions.slice(0, index),
       ...questions.slice(index + 1, questions.length),
@@ -57,29 +62,31 @@ export function QuizForm() {
   };
 
   const resetData = () => {
+    // resets all the data
     setTitle({ ...title, name: "", length: 0 });
     setDescription({ ...description, desc: "", length: 0 });
     setQuestions([]);
   };
 
   const handleSave = () => {
+    // logs all the user input
     // make post request to backend
-    console.log(title);
-    console.log(description);
-    console.log(questions);
+    const formData = { title, description, questions };
+    console.log(formData);
     resetData();
+    navigate("../", { replace: true });
   };
 
   const questionList = questions.map((obj, index) => {
-    // component list
+    //list of question input forms that modify the question array
     return (
       <QuestionInput
         key={index}
-        index={index}
-        deleteQuestion={deleteQuestion}
-        setQuestions={setQuestions}
-        obj={obj}
-        pokemon={pokemon}
+        index={index} // their identity
+        deleteQuestion={deleteQuestion} // ability to delete themselves
+        setQuestions={setQuestions} // ability to modify their input
+        obj={obj} // access to their  current value
+        pokemon={pokemon} // access to pokemon resource for answer choices
       ></QuestionInput>
     );
   });
