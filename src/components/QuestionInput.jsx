@@ -1,9 +1,11 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Form, AutoComplete, Stack, TagGroup, Tag } from "rsuite";
 import DoingRoundIcon from "@rsuite/icons/DoingRound";
-
+import { QuestionImageUpload } from "./QuestionImageUpload";
+//-------------Function-------------------
 export function QuestionInput({
+  // re-renders a lot
   index,
   deleteQuestion,
   setQuestions,
@@ -16,6 +18,35 @@ export function QuestionInput({
 
   const [typing, setTyping] = useState(false); // button and autocomplete controller
   const [inputValue, setInputValue] = useState(""); // for input value but onselect serves the final text for input
+  const [loading, setLoading] = useState(false);
+  const [disable, setDisable] = useState(false);
+
+  const handleFileDelete = () => {
+    setQuestions((questionArr) => {
+      return [
+        ...questionArr.slice(0, index),
+        {
+          image: null,
+          question: questionArr[index].question,
+          choices: questionArr[index].choices, // appends the selected text to the choices array in the indexth object of the question array
+        },
+        ...questionArr.slice(index + 1),
+      ];
+    });
+  };
+  const handleFileUpload = (obj, file) => {
+    setQuestions((questionArr) => {
+      return [
+        ...questionArr.slice(0, index),
+        {
+          image: file,
+          question: questionArr[index].question,
+          choices: questionArr[index].choices, // appends the selected text to the choices array in the indexth object of the question array
+        },
+        ...questionArr.slice(index + 1),
+      ];
+    });
+  };
 
   const handleTagRemove = (tag) => {
     setQuestions((questionArr) => {
@@ -52,7 +83,11 @@ export function QuestionInput({
   };
 
   const onMouseOut = () => {
-    setTimeout(setTyping(false), "1000"); // returns button
+    setTyping(false); // returns button
+  };
+
+  const handleInputChange = (text) => {
+    setInputValue(text);
   };
 
   const renderInput = () => {
@@ -67,9 +102,7 @@ export function QuestionInput({
               </div>
             );
           }}
-          onChange={(text) => {
-            setInputValue(text); // allows input text to be modified
-          }}
+          onChange={handleInputChange}
           onPressEnter={(event) => event.preventDefault()} // prevents default behavior
           onSelect={handleInputConfirm} // modifies choices property of object
           value={inputValue}
@@ -84,6 +117,24 @@ export function QuestionInput({
     );
   };
 
+  const handleQuestionChange = (text) => {
+    setQuestions((questionArr) => {
+      return [
+        ...questionArr.slice(0, index),
+        { question: text }, // modifies text of question
+        ...questionArr.slice(index + 1),
+      ];
+    });
+  };
+
+  const tagChoices = obj.choices.map((item, index) => (
+    <Tag key={index} closable size={"lg"} onClose={() => handleTagRemove(item)}>
+      {item}
+    </Tag>
+  ));
+
+  //----------------------Main Render-----------------------------
+
   return (
     <div className="box" onMouseLeave={onMouseOut}>
       <Form.Group>
@@ -91,47 +142,38 @@ export function QuestionInput({
         <Form.Control
           value={obj.question}
           name="q-1"
-          onChange={(text) => {
-            setQuestions((questionArr) => {
-              return [
-                ...questionArr.slice(0, index),
-                { question: text }, // modifies text of question
-                ...questionArr.slice(index + 1),
-              ];
-            });
-          }}
+          onChange={handleQuestionChange}
         ></Form.Control>
       </Form.Group>
       <Form.Group>
         <Form.ControlLabel>Answer Choice:</Form.ControlLabel>
         <Stack className={"dim-spaced"} spacing={15}>
-          <TagGroup>
-            {obj.choices.map((item, index) => (
-              <Tag
-                key={index}
-                closable
-                size={"lg"}
-                onClose={() => handleTagRemove(item)}
-              >
-                {item}
-              </Tag>
-            ))}
-          </TagGroup>
+          <TagGroup>{tagChoices}</TagGroup>
           {renderInput()}
         </Stack>
-
-        <div class={`q-delete`}>
-          <button
-            class="ui red compact button"
-            onClick={() => {
-              deleteQuestion(index);
-            }}
-          >
-            <i class="window close icon"></i>
-            Remove
-          </button>
-        </div>
       </Form.Group>
+      <Form.Group>
+        <QuestionImageUpload
+          disable={disable}
+          loading={loading}
+          setDisable={setDisable}
+          setLoading={setLoading}
+          handleFileUpload={handleFileUpload}
+          handleFileDelete={handleFileDelete}
+        />
+      </Form.Group>
+
+      <div class={`q-delete`}>
+        <button
+          class="ui red compact button"
+          onClick={() => {
+            deleteQuestion(index);
+          }}
+        >
+          <i class="window close icon"></i>
+          Remove
+        </button>
+      </div>
     </div>
   );
 }

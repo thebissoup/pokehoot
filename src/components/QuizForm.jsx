@@ -47,7 +47,9 @@ export function QuizForm() {
 
   const [title, setTitle] = useState({ name: "", length: 0 }); // form title
   const [description, setDescription] = useState({ desc: "", length: 0 }); // form description
-  const [questions, setQuestions] = useState([{ question: "", choices: [] }]); // form questions
+  const [questions, setQuestions] = useState([
+    { question: "", choices: [], image: null },
+  ]); // form questions
 
   const addQuestion = () => {
     setQuestions((questions) => [...questions, { question: "", choices: [] }]); //adds another question to question object array
@@ -74,7 +76,7 @@ export function QuizForm() {
     const formData = { title, description, questions };
     console.log(formData);
     resetData();
-    navigate("../", { replace: true });
+    // navigate("../", { replace: true });
   };
 
   const questionList = questions.map((obj, index) => {
@@ -86,7 +88,7 @@ export function QuizForm() {
         deleteQuestion={deleteQuestion} // ability to delete themselves
         setQuestions={setQuestions} // ability to modify their input
         obj={obj} // access to their  current value
-        pokemon={pokemon} // access to pokemon resource for answer choices
+        pokemon={pokemon} // access to pokemon resource for answer choices (will cause second initial rerendering)
       ></QuestionInput>
     );
   });
