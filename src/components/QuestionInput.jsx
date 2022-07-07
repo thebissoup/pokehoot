@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Form, AutoComplete, Stack, TagGroup, Tag } from "rsuite";
 import DoingRoundIcon from "@rsuite/icons/DoingRound";
 import { QuestionImageUpload } from "./QuestionImageUpload";
@@ -53,6 +53,7 @@ export function QuestionInput({
       return [
         ...questionArr.slice(0, index),
         {
+          image: questionArr[index].image,
           question: questionArr[index].question,
           choices: [
             ...questionArr[index].choices.filter((item) => item !== tag), // filters the tag in the choices array in the indexth object of the questionarray
@@ -68,6 +69,7 @@ export function QuestionInput({
       return [
         ...questionArr.slice(0, index),
         {
+          image: questionArr[index].image,
           question: questionArr[index].question,
           choices: [...questionArr[index].choices, text], // appends the selected text to the choices array in the indexth object of the question array
         },
@@ -121,7 +123,11 @@ export function QuestionInput({
     setQuestions((questionArr) => {
       return [
         ...questionArr.slice(0, index),
-        { question: text }, // modifies text of question
+        {
+          image: questionArr[index].image,
+          question: text,
+          choices: questionArr[index].choices,
+        }, // modifies text of question
         ...questionArr.slice(index + 1),
       ];
     });
