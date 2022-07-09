@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Header, Content, Footer, Nav } from "rsuite";
 import { QuizForm } from "./QuizForm";
+import { CreateChoose } from "./CreateChoose";
 
 export function CreatePage() {
   return (
@@ -18,9 +19,10 @@ export function CreatePage() {
         </div>
       </Header>
       <Content>
-        <div class="page-width">
+        <CreateChoose />
+        {/* <div class="page-width">
           <QuizForm />
-        </div>
+        </div> */}
       </Content>
       <Footer></Footer>
     </Container>

@@ -24,7 +24,7 @@
   .page-width{/* the html inside the content component to have a "margin"*/
     display: flex;
     flex-direction: column;
-    padding: 0 10%;
+    padding: 0 5%;
   }
   
   .header, .date, .rs-tag-text{
@@ -40,11 +40,70 @@
     transform: scale(0.5);
   }
   .box{
-    border: solid 1px #dce0e6;
+    border: solid 1px #D4D4D5;
     padding: 10px 10px;
     margin: 20px 0;
     border-radius: 5px;
-    box-shadow: 5px 10px 18px #dce0e6;
+    box-shadow: 0px 2px 0px #D4D4D5;
+    transition: .1s;
+  }
+  .box:hover{
+    border: solid 1px #BEBEBF;
+    box-shadow: 0px 2px 0px #BEBEBF;
+  }
+
+  .content-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .title-card{
+    width: 40%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    transform: scale(1.1);
+    max-width: 600px;
+  }
+
+  .section{
+    height: 75vh;
+  }
+
+  .faded{ /*fade mission statement on homepage*/
+    color: grey
+  }
+
+  .pikachu{ /* styles for the pikachu on the homepage*/
+    margin-top: 5px;
+  }
+
+  .button-resize{ /*styles for the add tag button*/
+    transform: scale(.8) translateX(-15px);
+  }
+
+  .tag-shift-down{
+    transform: translateY(10px);
+  }
+  .side-by-side{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .side-by-side > .card { /*remove the margin created by semantic in the instance*/
+    margin: 0px 5vw;
+    opacity: 0.65;
+    transition: 0.1s;
+  }
+
+  .side-by-side > .card:hover {
+      
+    opacity: 1;
   }
 
   .normal {background: #A8A878}

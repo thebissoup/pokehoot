@@ -2,10 +2,10 @@ import React from "react";
 import { Form, Input, Stack } from "rsuite";
 import { QuestionInput } from "./QuestionInput";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 export function QuizForm() {
-  let navigate = useNavigate();
+  //   let navigate = useNavigate();
 
   let urls = [
     {
@@ -96,7 +96,7 @@ export function QuizForm() {
   return (
     <div>
       <Stack justifyContent={"space-between"} spacing={6}>
-        <h1>{title.length < 1 ? "New Quiz" : title.name}</h1>
+        <h1>{title.length < 1 ? "Untitled" : title.name}</h1>
         <button class="ui button">
           <i class="plus icon"></i>
           New Quiz

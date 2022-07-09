@@ -113,7 +113,7 @@ export function QuestionInput({
     }
 
     return (
-      <button class="ui icon button" onClick={handleButtonClick}>
+      <button class="ui icon button button-resize" onClick={handleButtonClick}>
         <i class="plus icon"></i>
       </button>
     );
