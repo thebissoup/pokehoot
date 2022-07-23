@@ -94,12 +94,12 @@ export function QuizForm() {
   });
 
   return (
-    <div>
+    <div className={"page-width"}>
       <Stack justifyContent={"space-between"} spacing={6}>
         <h1>{title.length < 1 ? "Untitled" : title.name}</h1>
         <button class="ui button">
-          <i class="plus icon"></i>
-          New Quiz
+          <i class="left arrow icon"></i>
+          Back
         </button>
       </Stack>
 
@@ -145,7 +145,7 @@ export function QuizForm() {
           </button>
         </Form.Group>
       </Form>
-      <div class="dim-spaced">
+      <div class="dim-spaced box">
         <button onClick={handleSave} class="ui button green">
           Save
         </button>

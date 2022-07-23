@@ -19,14 +19,10 @@ export function CreateChoose() {
               Start Demo
             </button>
           </div>
-
-          {/* <div class="description">
-                Kristy is an art director living in New York.
-                </div> */}
         </div>
       </div>
 
-      <div className="ui card" href="/">
+      <a className="ui card" href="/create/new">
         <div className="image">
           <img
             src={
@@ -46,7 +42,7 @@ export function CreateChoose() {
                 Kristy is an art director living in New York.
                 </div> */}
         </div>
-      </div>
+      </a>
     </div>
   );
 }
