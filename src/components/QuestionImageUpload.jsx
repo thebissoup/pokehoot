@@ -39,7 +39,7 @@ export function QuestionImageUpload({
         setDisable(false);
       }}
     >
-      <Button loading={loading}>Upload Cover Image:</Button>
+      <Button loading={loading}>Upload Image:</Button>
     </Uploader>
   );
 }
