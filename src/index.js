@@ -2,14 +2,28 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { BrowserRouter } from "react-router-dom";
+import { HomePage } from './components/HomePage';
+import { CreatePage } from './components/CreatePage';
+import { LibraryPage } from './components/LibraryPage';
+import { CreateChoose } from './components/CreateChoose';
+import { QuizForm } from './components/QuizForm';
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
     <BrowserRouter>
-      <App />
+      <Routes>
+        <Route path="/" element={<App/>}>
+          <Route path="" element={<HomePage/>}></Route>
+          <Route path="create" element={<CreatePage/>}>
+            <Route path="" element={<CreateChoose/>}/>
+            <Route path="new" element={<QuizForm/>}/>
+          </Route>
+          <Route path="library" element={<LibraryPage/>}></Route>
+        </Route>
+      </Routes>
     </BrowserRouter>
   
 );

@@ -1,7 +1,12 @@
-.custom-nav-style{
-    margin: 20px;
+  .nav-position{
+    display: flex;
+    justify-content: center;
   }
-  
+
+  .nav-position > * > *{
+    margin: 0 5px;
+  }
+
   .image{
     height: 320px;
     width: 290px;

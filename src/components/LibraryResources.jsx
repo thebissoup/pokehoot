@@ -60,11 +60,6 @@ export function LibraryResources() {
 
   return (
     <div>
-      <Stack justifyContent={"space-between"} spacing={6}>
-        <h1>Library</h1>
-      </Stack>
-
-      <hr className={"dim-spaced"} />
       <Nav activeKey={active} appearance="tabs">
         <Nav.Item eventKey={"pokemon"} onClick={() => setActive("pokemon")}>
           PokeMon
