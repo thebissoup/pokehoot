@@ -1,7 +1,7 @@
 import React from "react";
 import { Stack, Divider } from "rsuite";
 import { QuizList } from "./QuizList";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 
 export function HomePage() {
   let QuizSets = [
@@ -21,13 +21,18 @@ export function HomePage() {
     },
   ];
 
+  const [active, setActive] = useOutletContext();
+  setActive("home");
+
   return (
     <div>
       <div className="content-section section">
         <div className="box title-card">
           <div>
-            <h1 className="">Welcome To Pokehoot</h1>
-            <p className="faded">The free pokemon alternative to Kahoot!</p>
+            <h1 className="ui header">Welcome To Pokehoot</h1>
+            <p className="subheading">
+              The free pokemon alternative to Kahoot!
+            </p>
             <img
               className="pikachu"
               src="https://projectpokemon.org/images/normal-sprite/pikachu.gif"
@@ -35,7 +40,7 @@ export function HomePage() {
             ></img>
           </div>
           <Stack spacing={3}>
-            <Link to={"/create"}>
+            <Link to={"/create"} onClick={() => setActive("create")}>
               <div class="ui primary vertical animated button" tabIndex="0">
                 <div class="hidden content">
                   <i class="long arrow alternate right icon"></i>

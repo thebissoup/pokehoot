@@ -1,39 +1,40 @@
 import React from "react";
-import { Form, Input, Stack } from "rsuite";
+import { Form, Input, Stack, Modal, Button, Placeholder } from "rsuite";
 import { QuestionInput } from "./QuestionInput";
 import { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
+
+let urls = [
+  {
+    resource_name: "pokemon",
+    url: `https://pokeapi.co/api/v2/pokemon?limit=250&offset=0`,
+  },
+  {
+    resource_name: "item",
+    url: `https://pokeapi.co/api/v2/item?limit=250&offset=0`,
+  },
+];
 
 export function QuizForm() {
-  //   let navigate = useNavigate();
-
-  let urls = [
-    {
-      resource_name: "pokemon",
-      url: `https://pokeapi.co/api/v2/pokemon?limit=250&offset=0`,
-    },
-    {
-      resource_name: "item",
-      url: `https://pokeapi.co/api/v2/item?limit=250&offset=0`,
-    },
-  ];
-
+  const [setHidden] = useOutletContext();
   const [pokemon, setPokemons] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [edited, setEdit] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getResourceArray(urls[0]);
   }, []);
 
+  //fetch array of url from object url and pass resource name
   async function getResourceArray({ resource_name, url }) {
-    //fetches the array of urls, takes resource name and parent url
     const response = await fetch(url);
     let data = await response.json();
-    let urls = data.results.map((obj) => obj.url); // returns an array of fetch urls
+    let urls = data.results.map((obj) => obj.url);
     fetchAll(resource_name, urls);
   }
-
+  //fetch json data from array of urls
   async function fetchAll(resource_name, urls) {
-    //makes each individual Promise to fetch pokemon data
     const res = await Promise.all(
       urls.map((url, index) =>
         fetch(url).catch((err) =>
@@ -48,47 +49,66 @@ export function QuizForm() {
   const [title, setTitle] = useState({ name: "", length: 0 }); // form title
   const [description, setDescription] = useState({ desc: "", length: 0 }); // form description
   const [questions, setQuestions] = useState([
+    // form questions
     { question: "", choices: [], image: null },
-  ]); // form questions
+  ]);
 
   const addQuestion = () => {
-    setQuestions((questions) => [...questions, { question: "", choices: [] }]); //adds another question to question object array
+    setQuestions((questions) => [...questions, { question: "", choices: [] }]); //adds questions
   };
 
   const deleteQuestion = (index) => {
-    // deletes an object in the object array at a specific index
     setQuestions((questions) => [
+      // delete question at index
       ...questions.slice(0, index),
       ...questions.slice(index + 1, questions.length),
     ]);
+    setEdit(true);
   };
 
+  //resets the data
   const resetData = () => {
-    // resets all the data
     setTitle({ ...title, name: "", length: 0 });
     setDescription({ ...description, desc: "", length: 0 });
     setQuestions([]);
   };
 
+  //make post request to backend
   const handleSave = () => {
-    // logs all the user input
-    // make post request to backend
     const formData = { title, description, questions };
     console.log(formData);
     resetData();
-    // navigate("../", { replace: true });
   };
 
+  //handle modal
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  //handle back out
+  const handleBackButton = () => {
+    if (!edited) {
+      navigate(-1);
+    } else {
+      setOpen(true);
+    }
+  };
+
+  const handleExit = () => {
+    handleClose();
+    navigate(-1);
+  };
+
+  //render list of questions
   const questionList = questions.map((obj, index) => {
-    //list of question input forms that modify the question array
     return (
       <QuestionInput
         key={index}
-        index={index} // their identity
+        index={index} // identifier
         deleteQuestion={deleteQuestion} // ability to delete themselves
         setQuestions={setQuestions} // ability to modify their input
-        obj={obj} // access to their  current value
-        pokemon={pokemon} // access to pokemon resource for answer choices (will cause second initial rerendering)
+        setEdit={setEdit}
+        obj={obj} // access to their json data
+        pokemon={pokemon} // access to pokemon resource
       ></QuestionInput>
     );
   });
@@ -96,8 +116,8 @@ export function QuizForm() {
   return (
     <div className={"page-width"}>
       <Stack justifyContent={"space-between"} spacing={6}>
-        <h1>{title.length < 1 ? "Untitled" : title.name}</h1>
-        <button class="ui button">
+        <h1 className="ui header">New Quiz</h1>
+        <button class="ui button" onClick={handleBackButton}>
           <i class="left arrow icon"></i>
           Back
         </button>
@@ -114,6 +134,7 @@ export function QuizForm() {
               maxLength={50}
               onChange={(text) => {
                 setTitle({ ...title, name: text, length: text.length });
+                setEdit(true);
               }}
             />
             {title.length > 25 ? (
@@ -133,6 +154,7 @@ export function QuizForm() {
                   desc: text,
                   length: text.length,
                 });
+                setEdit(true);
               }}
             />
           </div>
@@ -151,6 +173,26 @@ export function QuizForm() {
         </button>
         <button class="ui button">Cancel</button>
       </div>
+      <Modal
+        backdrop="static"
+        role="alertdialog"
+        open={open}
+        onClose={handleClose}
+        size="xs"
+      >
+        <Modal.Body>
+          Are you sure you want leave this page? Your progress will not be
+          saved.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={handleClose} appearance="subtle">
+            Cancel
+          </Button>
+          <Button onClick={handleExit} appearance="primary">
+            Yes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
