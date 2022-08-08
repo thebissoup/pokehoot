@@ -22,7 +22,7 @@ export function CreateChoose() {
         </div>
       </div>
 
-      <a className="ui card" href="/create/new">
+      <a className="ui card" href="/new">
         <div className="image">
           <img
             src={

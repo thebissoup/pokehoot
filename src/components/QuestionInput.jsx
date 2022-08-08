@@ -11,6 +11,7 @@ export function QuestionInput({
   setQuestions,
   obj,
   pokemon,
+  setEdit,
 }) {
   let pokemon_names = pokemon.map(
     (obj) => obj.name.charAt(0).toUpperCase() + obj.name.slice(1) //capitalization
@@ -46,6 +47,7 @@ export function QuestionInput({
         ...questionArr.slice(index + 1),
       ];
     });
+    setEdit(true);
   };
 
   const handleTagRemove = (tag) => {
@@ -90,6 +92,7 @@ export function QuestionInput({
 
   const handleInputChange = (text) => {
     setInputValue(text);
+    setEdit(true);
   };
 
   const renderInput = () => {
@@ -131,6 +134,7 @@ export function QuestionInput({
         ...questionArr.slice(index + 1),
       ];
     });
+    setEdit(true);
   };
 
   const tagChoices = obj.choices.map((item, index) => (
