@@ -9,6 +9,7 @@ import { CreateChoose } from './components/CreateChoose';
 import { QuizForm } from './components/QuizForm';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
+import { PageLayout } from './components/PageLayout';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,12 +17,15 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App/>}>
-          <Route path="" element={<HomePage/>}></Route>
-          <Route path="create" element={<CreatePage/>}>
-            <Route path="" element={<CreateChoose/>}/>
-            <Route path="new" element={<QuizForm/>}/>
+          <Route element={<PageLayout/>}>
+            <Route path="" element={<HomePage/>}></Route>
+            <Route path="create" element={<CreatePage/>}>
+              <Route path="" element={<CreateChoose/>}/>
+              
+            </Route>
+            <Route path="library" element={<LibraryPage/>}></Route>
           </Route>
-          <Route path="library" element={<LibraryPage/>}></Route>
+          <Route path="new" element={<QuizForm/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

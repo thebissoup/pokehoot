@@ -1,16 +1,17 @@
 
 import './App.css';
 import React from "react";
-import { PageLayout } from './components/Page';
+
 import { useState } from 'react';
-import "rsuite/dist/rsuite.min.css"
+import "rsuite/dist/rsuite.min.css";
+import { Outlet } from 'react-router-dom';
 
 
 function App() {
-  const[active, setActive] = useState("home")
+  const[active, setActive] = useState("");
   
   return (
-    <PageLayout active={active} setActive={setActive}  />
+    <Outlet context={[active, setActive]}/>
   );
 }
 
