@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Input, Stack, Modal, Button, Placeholder } from "rsuite";
 import { QuestionInput } from "./QuestionInput";
+import { QuestionImageUpload } from "./QuestionImageUpload";
 import { useState, useEffect } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
@@ -20,6 +21,8 @@ export function QuizForm() {
   const [pokemon, setPokemons] = useState([]);
   const [open, setOpen] = useState(false);
   const [edited, setEdit] = useState(false);
+  const [loading, setLoading] = useState(false); // cover image
+  const [disable, setDisable] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,6 +50,7 @@ export function QuizForm() {
   }
 
   const [title, setTitle] = useState({ name: "", length: 0 }); // form title
+  const [cover, setCover] = useState(null); //cover image
   const [description, setDescription] = useState({ desc: "", length: 0 }); // form description
   const [questions, setQuestions] = useState([
     // form questions
@@ -69,13 +73,14 @@ export function QuizForm() {
   //resets the data
   const resetData = () => {
     setTitle({ ...title, name: "", length: 0 });
+    setCover(null);
     setDescription({ ...description, desc: "", length: 0 });
     setQuestions([]);
   };
 
   //make post request to backend
   const handleSave = () => {
-    const formData = { title, description, questions };
+    const formData = { title, cover, description, questions };
     console.log(formData);
     resetData();
   };
@@ -96,6 +101,16 @@ export function QuizForm() {
   const handleExit = () => {
     handleClose();
     navigate(-1);
+  };
+
+  const handleCoverUpload = (obj, file) => {
+    setCover(file);
+    setEdit(true);
+  };
+
+  const handleCoverDelete = () => {
+    setCover(null);
+    setEdit(true);
   };
 
   //render list of questions
@@ -125,8 +140,8 @@ export function QuizForm() {
 
       <hr class="dim-spaced" />
       <Form fluid>
-        <Form.Group>
-          <div className="box">
+        <div className="box">
+          <Form.Group>
             <Form.ControlLabel>Title: </Form.ControlLabel>
             <Form.Control
               name="title"
@@ -140,8 +155,21 @@ export function QuizForm() {
             {title.length > 25 ? (
               <Form.HelpText>{50 - title.length} characters left</Form.HelpText>
             ) : null}
-          </div>
-        </Form.Group>
+          </Form.Group>
+          <Form.Group>
+            <Form.ControlLabel>Cover Image: </Form.ControlLabel>
+          </Form.Group>
+          <Form.Group>
+            <QuestionImageUpload
+              disable={disable}
+              loading={loading}
+              setDisable={setDisable}
+              setLoading={setLoading}
+              handleFileUpload={handleCoverUpload}
+              handleFileDelete={handleCoverDelete}
+            />
+          </Form.Group>
+        </div>
         <Form.Group>
           <div className="box">
             <Form.ControlLabel>Description: </Form.ControlLabel>
