@@ -4,7 +4,7 @@
   }
 
   .nav-position > * > *{
-    margin: 0 5px;
+    margin: 0 3px;
   }
 
   .image{
@@ -64,13 +64,13 @@
   }
 
   .title-card{
-    width: 40%;
+    width: 30%;
     height: fit-content;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 20px;
-    transform: scale(1.1);
+    transform: scale(1.2);
     max-width: 600px;
   }
 
@@ -78,8 +78,11 @@
     height: 75vh;
   }
 
-  .faded{ /*fade mission statement on homepage*/
-    color: grey
+
+  .subheading{ /*subheading on homepage*/
+    transform: translateY(-15px);
+    font-size: 12px ;
+    color: grey;
   }
 
   .pikachu{ /* styles for the pikachu on the homepage*/
